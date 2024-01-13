@@ -42,7 +42,171 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {},
             child: Image.asset('assets/icons/menu.png'),
           ),
+
           actions: [
+
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+              child: Row(
+                children: [
+                  Container(
+                    height: 45.0,
+                    width: 300.0,
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    decoration: BoxDecoration(
+                      color: white,
+                      border: Border.all(color: green),
+                      boxShadow: [
+                        BoxShadow(
+                          color: green.withOpacity(0.15),
+                          blurRadius: 10,
+                          offset: const Offset(0, 0),
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          height: 45,
+                          width: 250,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Search',
+                            ),
+                          ),
+                        ),
+                        Image.asset(
+                          'assets/icons/search.png',
+                          height: 25,
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Container(
+                    height: 45.0,
+                    width: 45.0,
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    decoration: BoxDecoration(
+                      color: green,
+                      boxShadow: [
+                        BoxShadow(
+                          color: green.withOpacity(0.5),
+                          blurRadius: 10,
+                          offset: const Offset(0, 0),
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Image.asset(
+                      'assets/icons/adjust.png',
+                      color: white,
+                      height: 25,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 35.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  for (int i = 0; i < categories.length; i++)
+                    GestureDetector(
+                      onTap: () {
+                        setState(() => selectId = categories[i].id);
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            categories[i].name,
+                            style: TextStyle(
+                              color: selectId == i
+                                  ? green
+                                  : black.withOpacity(0.7),
+                              fontSize: 16.0,
+                            ),
+                          ),
+                          if (selectId == i)
+                            const CircleAvatar(
+                              radius: 3,
+                              backgroundColor: green,
+                            )
+                        ],
+                      ),
+                    )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            // Assuming you want to show some recipe-related content here
+            SizedBox(
+              height: 420.0,
+              child: 
+              Consumer<RecipeClass>(
+                builder: (BuildContext context, myProvider, Widget? child) {
+                  return GridView.builder(
+                    gridDelegate:
+                     SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10.0,
+                      mainAxisSpacing: 10.0,
+                      childAspectRatio: 1.0,
+                    ),
+                    itemCount: myProvider.allRecipes.length,
+                    itemBuilder: (context, index) {
+                      return RecipeWidget(myProvider.allRecipes[index]);
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    ));
+  }
+
+  Widget mainPlantsCard(index) {
+    return GestureDetector(
+      onTap: () {
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     // builder: (builder) => DetailsPage(plant: plants[index]),
+        //   ),
+        // );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          color: white,
+          boxShadow: [
+            BoxShadow(
+              color: black.withOpacity(0.05),
+              blurRadius: 15,
+              offset: const Offset(5, 5),
+            ),
+          ],
+          border: Border.all(color: green, width: 2),
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        child: Stack(
+          children: [
+
             Container(
               height: 40.0,
               width: 40.0,

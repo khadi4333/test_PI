@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import '../core/color.dart';
 import '../data/bottom_menu.dart';
 import '../sceens/account_screen.dart';
+import '../sceens/panier.dart';
+
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -70,6 +72,7 @@ List<Widget> child = [
   const HomePage(),
   const FavoriteRecipesScreen(),
   const NewRecipeScreen(),
+  AcheterPage(),
   // Container(
   //   child: Text("Texte centré - Page 3", textAlign: TextAlign.center),
   //   color: white,
@@ -81,6 +84,7 @@ List<Widget> child = [
     alignment: Alignment.center,
   ),
   const AccountScreen()
+
   // Container(
   //   child: Text("Texte centré - Page 5", textAlign: TextAlign.center),
   //   color: white,
