@@ -4,6 +4,7 @@ import 'package:app_pi/sceens/new_recipe_screens.dart';
 import 'package:flutter/material.dart';
 import '../core/color.dart';
 import '../data/bottom_menu.dart';
+import '../sceens/panier.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -61,6 +62,7 @@ List<Widget> child = [
   const HomePage(),
   const FavoriteRecipesScreen(),
   const NewRecipeScreen(),
+  AcheterPage(),
   // Container(
   //   child: Text("Texte centré - Page 3", textAlign: TextAlign.center),
   //   color: white,
@@ -71,9 +73,9 @@ List<Widget> child = [
     color: white,
     alignment: Alignment.center,
   ),
-  Container(
-    child: Text("Texte centré - Page 5", textAlign: TextAlign.center),
-    color: white,
-    alignment: Alignment.center,
-  ),
+  // Container(
+  //   child: Text("Texte centré - Page 5", textAlign: TextAlign.center),
+  //   color: white,
+  //   alignment: Alignment.center,
+  // ),
 ];

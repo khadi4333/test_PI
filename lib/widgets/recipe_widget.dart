@@ -42,7 +42,7 @@ class RecipeWidget extends StatelessWidget {
                                     .updateIsFavorite(recipeModel);
                               },
                               child: recipeModel.isFavorite
-                                  ? const Icon(
+                                  ? const Icon( 
                                       Icons.favorite,
                                       color: Colors.red,
                                     )

@@ -165,7 +165,7 @@ class _HomePageState extends State<HomePage> {
             ),
             // Assuming you want to show some recipe-related content here
             SizedBox(
-              height: 320.0,
+              height: 420.0,
               child: 
               Consumer<RecipeClass>(
                 builder: (BuildContext context, myProvider, Widget? child) {

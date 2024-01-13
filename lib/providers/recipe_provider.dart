@@ -24,6 +24,7 @@ class RecipeClass extends ChangeNotifier {
   // List to store recipes
   List<RecipeModel> allRecipes = [];
   List<RecipeModel> favoriteRecipes = [];
+  List<RecipeModel> Acheter = [];
   getRecipes() async {
     allRecipes = await DbHelper.dbHelper.getAllRecipes();
     favoriteRecipes = allRecipes.where((e) => e.isFavorite).toList();
@@ -57,6 +58,12 @@ class RecipeClass extends ChangeNotifier {
 
   updateIsFavorite(RecipeModel recipeModel) {
     DbHelper.dbHelper.updateIsFavorite(recipeModel);
+    getRecipes();
+    notifyListeners();
+  }
+//corriger le code de achat pour que si on click sur le boutton ajouter cett methode permet d'ajouter dans une autre page qu'on va le preciser
+  AcheterProduit(RecipeModel recipeModel) {
+    Acheter.add(recipeModel);
     getRecipes();
     notifyListeners();
   }
