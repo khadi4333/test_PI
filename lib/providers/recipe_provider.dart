@@ -24,9 +24,16 @@ class RecipeClass extends ChangeNotifier {
   // List to store recipes
   List<RecipeModel> allRecipes = [];
   List<RecipeModel> favoriteRecipes = [];
+  List<RecipeModel> filteredRecipes = [];
+
   getRecipes() async {
     allRecipes = await DbHelper.dbHelper.getAllRecipes();
     favoriteRecipes = allRecipes.where((e) => e.isFavorite).toList();
+    notifyListeners();
+  }
+
+  void filterRecipesByCategory(String category) {
+    filteredRecipes = allRecipes.where((e) => e.name == category).toList();
     notifyListeners();
   }
 

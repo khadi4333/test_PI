@@ -1,3 +1,4 @@
+import 'package:app_pi/ThemeNotifier.dart';
 import 'package:flutter/material.dart';
 import '../providers/recipe_provider.dart';
 import 'package:provider/provider.dart';
@@ -11,61 +12,67 @@ class FavoriteRecipesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<RecipeClass>(
-      builder: (BuildContext context, myProvider, Widget? child) {
-        return Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('My Recipes'),
-                const SizedBox(height: 4),
-                Text(
-                  'Favorite Recipes:',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: !myProvider.isDark
-                        ? const Color.fromARGB(255, 244, 143, 177)
-                        : null,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: context.watch<ThemeNotifier>().isDarkMode
+          ? ThemeData.dark()
+          : ThemeData.light(),
+      home: Consumer<RecipeClass>(
+        builder: (BuildContext context, myProvider, Widget? child) {
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('My Recipes'),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Favorite Recipes:',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: !myProvider.isDark
+                          ? const Color.fromARGB(255, 244, 143, 177)
+                          : null,
+                    ),
                   ),
+                ],
+              ),
+              actions: [
+                // To search in the favorite list
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => SearchRecipeScreen(
+                        recipes: myProvider.favoriteRecipes,
+                      ),
+                    ));
+                  },
+                  child: const Icon(Icons.search),
                 ),
+
+                // const MyPopupMenuButton(),
               ],
             ),
-            actions: [
-              // To search in the favorite list
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => SearchRecipeScreen(
-                      recipes: myProvider.favoriteRecipes,
-                    ),
-                  ));
-                },
-                child: const Icon(Icons.search),
+            // drawer: Drawer(
+            //   child: DrawerList(),
+            // ),
+            body: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10.0,
+                mainAxisSpacing: 10.0,
+                childAspectRatio:
+                    1.0, // Adjust this aspect ratio for equal width and height
               ),
-
-              // const MyPopupMenuButton(),
-            ],
-          ),
-          // drawer: Drawer(
-          //   child: DrawerList(),
-          // ),
-          body: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10.0,
-              mainAxisSpacing: 10.0,
-              childAspectRatio:
-                  1.0, // Adjust this aspect ratio for equal width and height
+              itemCount: myProvider.favoriteRecipes.length,
+              itemBuilder: (context, index) {
+                return RecipeWidget(myProvider.favoriteRecipes[index]);
+              },
             ),
-            itemCount: myProvider.favoriteRecipes.length,
-            itemBuilder: (context, index) {
-              return RecipeWidget(myProvider.favoriteRecipes[index]);
-            },
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
